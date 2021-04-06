@@ -1,0 +1,148 @@
+\section{Teilversuch 2: Strahlungsleistung kontinuerlicher und gepulster Laser verschiedener Wellenlänge (Laser \SI{473}{\nano\meter}, \SI{532}{\nano\meter}, \SI{590}{\nano\meter})}
+	\resnum
+	\subsection{Bestimmung der Ausgangsleistung}
+		Keine Auswertung
+	\subsection{Schutzabstufung der Laserschutzbrillen und Filtergläser}
+		Da wir immer nur die relative Leistung vergleichen, ist der Effekt von der falschen Wellenlänge-Einstellung nicht so groß.
+
+		Mit der Werten:
+		\begin{center}
+			\begin{tabular}{lllll}
+				\toprule
+				& \multicolumn{3}{c}{Leistung / \si{\milli\watt}} & \\
+				\cmidrule{2-4}
+				Wellenlänge & Part 15a & Part 15b & Part 15c & \\
+				\midrule
+				\multirow{2}{*}{\SI{473}{\nano\meter}} 
+					& \num{2.1}    & \num{2.1}    & \num{2.1}    & Ohne \\
+					& \num{0.0134} & \num{0.0461} & \num{0.3253} & Mit \\
+				\multirow{2}{*}{\SI{532}{\nano\meter}} 
+					& \num{8.4}    & \num{8.4}    & \num{8.4}    & Ohne \\
+					& \num{0.0047} & \num{0.1082} & \num{3.4}    & Mit \\
+				\multirow{2}{*}{\SI{590}{\nano\meter}} 
+					& \num{1.2}    & \num{1.2}    & \num{1.2}    & Ohne \\
+					& \num{1.0}    & \num{0.7296} & \num{0.4349} & Mit \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+		\pagebreak
+		werden die optische Dichten $\log_{10}{\frac{P_0}{P}}$ mithilfe LibreOffice Calc berechnet:
+		\begin{center}
+			\begin{tabular}{lllll}
+				\toprule
+				& \multicolumn{3}{c}{Optische Dichte} & \\
+				\cmidrule{2-4}
+				Wellenlänge & Part 15a & Part 15b & Part 15c & \\
+				\midrule
+				\multirow{2}{*}{\SI{473}{\nano\meter}} 
+					& \textcolor{red}{\num{2.2}}   & \num{1.7}  & \num{0.81} & Exp \\
+					& \textcolor{red}{3 bis 5}     & \num{1}    & \num{0}    & Theo \\
+				\multirow{2}{*}{\SI{532}{\nano\meter}} 
+					& \num{3.3}   & \num{1.9}  & \num{0.39} & Exp \\
+					& 3 bis 5     & \num{1}    & \num{0}    & Theo \\
+				\multirow{2}{*}{\SI{590}{\nano\meter}} 
+					& \num{0.079} & \num{0.22} & \num{0.44} & Exp \\
+					& \num{0}     & \num{0}    & \num{0}    & Theo \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+		Also sind die Brillen schutzend wie beschreibt für alle Wellenlängen, außer die Brille Part 15a mit der Wellenlänge \SI{473}{\nano\meter}. Die berechnete optische Dichte war weniger als die beschreibte optische Dichte und deswegen nicht genug schutzend für das Verwendungszweck. 
+
+		Mit der Werten:
+		\begin{center}
+			\begin{tabular}{lllll}
+				\toprule
+				& \multicolumn{3}{c}{Leistung / \si{\milli\watt}} & \\
+				\cmidrule{2-4}
+				Wellenlänge & RG1000 & NG9 & BG39 & \\
+				\midrule
+				\multirow{2}{*}{\SI{473}{\nano\meter}} 
+					& \num{2.5}    & \num{2.5}    & \num{2.5}    & Ohne \\
+					& \num{0.0236} & \num{0.1324} & \num{2.0}    & Mit \\
+				\multirow{2}{*}{\SI{532}{\nano\meter}} 
+					& \num{8.4}    & \num{8.4}    & \num{8.4}    & Ohne \\
+					& \num{0.0447} & \num{0.3667} & \num{6.5}    & Mit \\
+				\multirow{2}{*}{\SI{590}{\nano\meter}} 
+					& \num{1.2}    & \num{1.2}    & \num{1.2}    & Ohne \\
+					& \num{0.0069} & \num{0.0492} & \num{0.2425} & Mit \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+		werden die Transmission $\left(T = \frac{P}{P_0}\right)$ mithilfe LibreOffice Calc berechnet:
+		\begin{center}
+			\begin{tabular}{lllll}
+				\toprule
+				& \multicolumn{3}{c}{Transmission $T$ / $\%$} & \\
+				\cmidrule{2-4}
+				Wellenlänge & RG1000 & NG9 & BG39 & \\
+				\midrule
+				\multirow{2}{*}{\SI{473}{\nano\meter}} 
+					& \num{0.94}      & \num{5.3}   & \num{80}   & Exp \\
+					& $<$ \num{0.001} & \num{4.356} & \num{95.6} & Theo (\SI{470}{\nano\meter}) \\
+				\multirow{2}{*}{\SI{532}{\nano\meter}} 
+					& \num{0.53}      & \num{4.4}   & \num{77}     & Exp \\
+					& $<$ \num{0.001} & \num{4.021} & \num{95.71}  & Theo (\SI{530}{\nano\meter}) \\
+				\multirow{2}{*}{\SI{590}{\nano\meter}} 
+					& \num{0.58}      & \num{4.1}   & \num{20}    & Exp \\
+					& $<$ \num{0.001} & \num{3.908} & \num{66.8}  & Theo \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+
+		wobei die theoretische Werten aus den Datenblätter\footnote{
+			\href{http://www.schott.com/d/advanced_optics/a1138abb-eab0-4996-b31b-6032be69d452/1.5/schott-longpass-rg1000-jun-2017-en.pdf}{http://www.schott.com/d/advanced\_optics/a1138abb-eab0-4996-b31b-6032be69d452/1.5/schott-longpass-rg1000-jun-2017-en.pdf}\\
+			\href{http://www.schott.com/d/advanced_optics/297bc6b7-4f93-4df7-8348-2fe1e0f810b8/1.5/schott-neutral-density-ng9-jun-2017-en.pdf}{http://www.schott.com/d/advanced\_optics/297bc6b7-4f93-4df7-8348-2fe1e0f810b8/1.5/schott-neutral-density-ng9-jun-2017-en.pdf} \\
+			\href{http://www.schott.com/d/advanced_optics/4dfdb14e-be6b-453b-850e-1eec963259c3/1.6/schott-bandpass-bg39-jun-2017-en.pdf}{http://www.schott.com/d/advanced\_optics/4dfdb14e-be6b-453b-850e-1eec963259c3/1.6/schott-bandpass-bg39-jun-2017-en.pdf}
+		} stammen.
+
+		Die gemessene Transmissionen bei RG1000 scheinen schon ziemlich niedrig $(< 1\%)$ und die Diskrepanz zwischen die theoretische und experimentelle Werten stamm vermutlich aus der Beleuchtung des Experiment-Raums und der begrenzten Genauigkeit des Powermeters.
+
+		Die gemessene Transmissionen bei NG9 liegen allein der Nähe von der theoretischen Werten, also können wir annehmen, dass sie verträglich miteinander sind. 
+
+		Die gemessene Transmissionen bei BG39 sind viel niedriger als die theoretische Werten. Diese Diskrepanz liegt vermütlich daran. dass der Powermeter verschiedene Wellenlängen nicht unterscheiden kann. Es wird also immer die Leistung aller Wellenlänge gemessen. Da das Filterglas aber die andere Wellenlänge auch filtert, ist die Leistung von der anderen Wellenlängen auch erniedrigt. Somit beitragt die Beleuchtung des Experiment-Raumes auch zu der Messung. Das kann dann zu eine niedrigere Transmissionmessung. 
+
+		Diese Problem könnte aufgehoben werden, indem man die Beleutung im Raum während des Experiments ausschaltet. 
+
+	\subsection{Bestimmung des Strahldurchmessers}
+		Aus Abbildung 10 der Anleitung gilt:
+		\begin{itemize}
+			\item $T = 86\% \implies d = 2\omega$
+			\item $T = 99\% \implies d = \pi\omega$
+		\end{itemize}
+		Somit können wir den $99\%$-Durchmesser mit der folgenden Formel bestimmen:
+		\begin{equation}
+			d_{99} = d_{86}\times \frac{\pi}{2}
+		\end{equation}
+		Die mittlere Intensität des Strahlquerschnitts ist dann gegeben durch:
+		\begin{equation}
+			\bar{I} = \frac{P_0\times0,99}{A} = \frac{P_0\times0,99}{\pi\times \left(\frac{d_{99}}{2}\right)^2}
+			= \frac{4\times 0,99P_0}{\pi d_{99}^2}
+			= \frac{3,96P_0}{\pi d_{99}^2}
+		\end{equation}
+		Unter Berücksichtungung der Gaußschen Strahlprofil ist die maximale Intensität gegeben durch:
+		\begin{equation}
+			I_0 = \frac{2}{\pi\omega^2}P_0 
+			= \frac{2}{\pi\left(\frac{d_{86}}{2}\right)^2}P_0
+			= \frac{8}{\pi d_{86}^2}P_0
+		\end{equation}
+		Wir erhalten dadurch:
+		\begin{center}
+			\begin{tabular}{llllll}
+				\toprule
+					Wellenlänge / \si{\nano\meter} 
+					& $P_0$ / \si{\milli\watt} 
+					& $d_{86}$ / \si{\milli\meter} 
+					& $d_{99}$ / \si{\milli\meter} 
+					& $\bar{I}$ / \si{\watt\per\meter\squared} 
+					& $I_0$ / \si{\watt\per\meter\squared} 
+					\\
+				\midrule
+					\num{473} & \num{2.7} & \num{2.55} & \num{4.01} & \num{212} & \num{1.06e3} \\
+					\num{532} & \num{8.4} & \num{2.70} & \num{4.24} & \num{589} & \num{2.94e3} \\
+					\num{590} & \num{1.1} & \num{0.94} & \num{1.48} &             &            \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+		Im Vergleich zur der Grenzwerten aus Teilversuch 1 liegen die maximale Intensität weit ober der MZB. Die Laser im Versuchsraum sind somit in diesem Sinne ziemlich gefährlich. 
+	\nonum
+	

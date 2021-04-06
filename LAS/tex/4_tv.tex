@@ -1,0 +1,63 @@
+\section{Teilversuch 4: Änderung von lasersicherheitsrelevanten Parametern durch verschiedene optische Instrumente}
+	\setcounter{subsection}{2}
+	\resnum
+	\subsection{Strahlprofil}
+		Da ich die Aufgabe 1 in der Vorbereitung falsch gemacht habe, sind die Rechnung hier nachbessert. Mit WolframAlpha erhalten wir:
+		\begin{align}
+			P = \int_{A} I~\dd A 
+			&= \int_{0}^{2\pi} \dd\varphi \int_{0}^{R} \dd r ~ r I_0 \exp{-2\left(\frac{r}{\omega}\right)^2} \notag \\
+			&= 2\pi I_0 \int_{0}^{R} \dd r ~ r\exp{-2\left(\frac{r}{\omega}\right)^2} \notag \\
+			&= 2\pi I_0 \omega^2 \left[1 - \exp{-2\left(\frac{R}{\omega}\right)^2}\right] \notag
+		\end{align}
+		Die resultierende Kurve sieht aber genauso aus, wie in der Vorbereitung. Wähle $\omega = \sqrt{2}$ und $I_0 = \frac{1}{4\pi}$ und plotte $1 - \exp{-R^2}$:
+		\begin{figure}[H]
+			\centering
+			\input{./plots/leistung.tex}
+			\caption{\centering Intensitätsprofil eines Laserstrahls}
+			\label{fig:tvfour-leistung}
+			\vspace{-1em}
+		\end{figure}
+		Nun plotten wir die Daten aus dem Versuch und führe eine Kurveanpassung mit:
+		\begin{align}
+			P(d) &= A\omega^2\left(1 - \exp{-2\left(\frac{d}{2\omega}\right)^2}\right) = A\omega^2\left(1 - \exp{-\frac{d^2}{2\omega^2}}\right) \\
+			&= AW\left(1 - \exp{-\frac{d^2}{2W}}\right)
+		\end{align}
+		Bei der Kurvenanpassung wird einen Fehler $\Delta P$ von \SI{0.1}{\milli\watt} und einen Fehler $\Delta d$ von \SI{0.1}{\milli\meter} angenommen.
+
+		Aus \gnuplot{} (Appendix \ref{appdx:gnuplottv4}) erhalten wir:
+		\begin{figure}[H]
+			\centering
+			\input{./plots/tv4-plot.tex}
+			\caption{\centering Intensitätsprofil des grünen Lasers $(\chi^2_{\text{red}} = 1,77774 \approx 1 \Rightarrow \text{Gute Anpassung})$ }
+			\label{fig:tvfour-leistung}
+			\vspace{-1em}
+		\end{figure}
+		mit dem Endergebnis:
+		\begin{equation*}
+			\begin{tabu}{lll}
+				\toprule
+				\text{Variable} & \text{Wert} & \text{Gerundet} \\
+				\midrule
+				A        & \SI{1.0567(488)}{\milli\watt\per\meter\squared} & \SI{1.06(5)}{\milli\watt\per\meter\squared}\\
+				\omega^2 & \SI{7.4531(4013)}{\milli\meter\squared}         & \SI{7.5(5)}{\milli\meter\squared} \\
+				\bottomrule
+			\end{tabu}
+		\end{equation*}
+		Da die Kurveanpassung ziemlich gut war, können wir daraus schließen, dass die experimentelle Werte die theoretische Gleichung wirklich übereinstimmt. Es ist auch zu bemerken, dass die erhaltenen Kurve komplementär zum gaußförmigen Intensitätsprofil des Laserstrahls ist.
+	\subsection{Divergenzwinkel}
+		Der Halbdivergenzwinkel haben wir als $\varphi = \SI{3}{\degree}$ im Versuch bestimmt. Mit einer Bestrahlungsdauer von $\SI{150}{\second}$ liegen die Bestrahlung immer noch im Bereich $\SI{e2}{\second}$ bis $\SI{3e4}{\second}$ und wir haben als MZB für den grünen Laser $\text{MZB} = \SI{10}{\watt\per\meter\squared}$.
+
+		Wir nehmen noch zusätzlich an, dass der Fokus eine Durchmesser von $d = \SI{1}{\milli\meter}$ hat.
+
+		Somit erhalten wir mit $P = \SI{8.4}{\milli\watt}$ als $r_{\text{NOHD}}$:
+		\begin{align}
+			r_{\text{NOHD}} &= \frac{1}{\theta} \times \frac{180}{\pi}\left(\sqrt{\frac{8P}{\pi\text{MZB}}} - d\right) \notag\\
+			&= \frac{1}{2\varphi} \times \frac{180}{\pi}\left(\sqrt{\frac{8P}{\pi\text{MZB}}} - d\right) \notag\\
+			&= \frac{1}{2(3)} \times \frac{180}{\pi}\left(\sqrt{\frac{8(\SI{8.4e-3}{\watt})}{\pi(\SI{10}{\watt\per\meter\squared})}} - \SI{1e-3}{\meter}\right) \notag \\
+			&= \SI{0.43}{\meter} = \SI{43}{\centi\meter}
+		\end{align}
+		Wir haben während des Versuchs die Divergenzwinkel bei einem Abstand größer als \SI{43}{\centi\meter} gemessen, somit ist man bei diesem Abstand am Ende des Tischs schon vom Laser sicher. 
+	\nonum
+
+
+
