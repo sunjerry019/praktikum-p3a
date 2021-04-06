@@ -1,0 +1,277 @@
+\documentclass[11pt]{article} %twoside
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{libertine}
+\usepackage[a4paper]{geometry}
+\usepackage{pdfpages}
+\usepackage{parskip}
+\usepackage{amsmath, amsthm, amssymb, commath, mathtools}
+\usepackage{cancel}
+\usepackage{physics}
+\usepackage{nicefrac}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\graphicspath{{./plots/}{./images/}{./attachments/}}
+\usepackage{wrapfig}
+\definecolor{capblue}{HTML}{00709B}
+\usepackage[margin=1cm,font={small},labelfont={color=capblue}]{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{minted}
+\usepackage[title]{appendix}
+\usepackage{icomma}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage[bottom]{footmisc}
+\usepackage[separate-uncertainty=true]{siunitx}
+\sisetup{locale = DE}
+\DeclareSIUnit\pixel{px}
+\DeclareSIUnit\pix{px}
+% \usepackage{tcolorbox}
+\usepackage{titlesec}
+\usepackage{ccicons}
+
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+\renewcommand{\ttdefault}{cmtt}
+
+\usepackage{hyperref}
+\usepackage{bookmark}
+% https://tex.stackexchange.com/a/33701
+\makeatletter
+    \newcommand{\nonum}[0]{%
+        \let\@oldseccntformat\@seccntformat %
+        \renewcommand\@seccntformat[1]{}%
+        }
+    \newcommand{\resnum}[0]{\let\@seccntformat\@oldseccntformat}
+\makeatother
+
+\usepackage{chngcntr}
+\counterwithin{figure}{section}
+
+\usepackage[style=iso-authoryear,sortcites=true,sorting=nyt,backend=biber,language=ngerman,natbib=true,sortlocale=de_DE]{biblatex}
+\addbibresource{references.bib}
+\newcommand{\mkbibbracketscol}[1]{\textcolor{gray}{\mkbibbrackets{#1}}}
+\DeclareCiteCommand{\cite}[\mkbibbracketscol]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibbracketscol]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+
+\DeclareCiteCommand{\cbx@textcite}[\textcolor{gray}]
+  {\usebibmacro{textcite:init}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{textcite}}
+  {}
+  {\usebibmacro{textcite:postnote}}
+
+\DefineBibliographyStrings{ngerman}{%
+	bibliography 	= {Literaturverzeichnis},
+	andothers		= {u.\,a.\adddot}
+}
+
+\let\realcitep\citep
+\renewcommand*{\citep}[1]{{\footnotesize\realcitep{#1}}}
+
+\newcommand{\versuch}[0]{Mikroskopie@Home}
+\newcommand{\versuchLang}[0]{Mikroskopie mit dem Foldscope}
+
+\hypersetup{
+	pdftitle={P3A -- \versuch{} Laborbericht},
+	pdfauthor={Yudong Sun},
+	bookmarksnumbered=true,
+	bookmarksopen=true,
+	bookmarksopenlevel=2,
+	pdfstartview=Fit,
+	pdfpagemode=UseOutlines,
+	colorlinks=true,
+	linkcolor=MidnightBlue,
+	filecolor=magenta,      
+	urlcolor=blue,
+	citecolor=gray
+}
+\urlstyle{same}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\renewcommand{\subsectionmark}[1]{}
+\fancyhf{}
+% \fancyhead[RO]{Yudong Sun}
+% \fancyhead[LO]{\nouppercase{\rightmark} -- \versuch}
+% \fancyhead[LE]{Yudong Sun}
+% \fancyhead[RE]{\versuch~ -- \nouppercase{\rightmark} }
+\fancyhead[L]{Yudong Sun (mit Schramm)}
+\fancyhead[R]{{\small \versuch} \\[-3pt] {\footnotesize \nouppercase{\rightmark}}}
+\cfoot{\thepage}
+
+% Custom Defs
+\newcommand*{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\newcommand*{\maxi}[1]{\text{max}\left(#1\right)}
+\newcommand*{\mini}[1]{\text{min}\left(#1\right)}
+\newcommand*{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand*{\iu}[1]{\textit{\underline{#1}}}
+\newcommand*{\gnuplot}[0]{\texttt{gnuplot}}
+\newcommand*{\captionbr}[0]{\\\rule{\textwidth}{0pt}\\\vspace{-\baselineskip}}
+\newcommand*{\sigfig}[1]{\hspace{0.5cm}\text{(#1 sig. Zif.)}}
+\newcommand*{\pbrace}[1]{\left(#1\right)}
+\newcommand*{\sbrace}[1]{\left[#1\right]}
+\newcommand*{\bDelta}[1]{\pbrace{\Delta #1}}
+\newcommand*{\overbar}[1]{\overline{\raisebox{0pt}[1.2\height]{$#1$}}} % https://tex.stackexchange.com/a/87615
+% \newenvironment{beispiel}
+%     {\begin{tcolorbox}[title=Beispielrechnung]}
+%     {\end{tcolorbox}}
+\newcommand*{\tou}[1]{\textcolor{Brown}{#1}}
+
+% \addto\captionsngerman{
+%     \let\oldfigname\figurename
+%     \renewcommand{\figurename}{[\oldfigname}
+%     \let\oldthefig\thefigure
+%     \renewcommand{\thefigure}{\oldthefig]}
+% } % https://tex.stackexchange.com/a/17490
+% https://tex.stackexchange.com/a/101624 new line in caption
+
+% Gaußsche Fehler Erzeuger
+\makeatletter
+    \newcommand{\gausserror}[2]{% \gausserror{G}{faktoren}
+        \sqrt{%
+            \@tempswafalse
+            \@for\factor:=#2
+            \do{
+                \if@tempswa+%
+                \else%
+                    \@tempswatrue%
+                \fi%
+                \left(\pdv{#1}{\factor}\Delta\factor\right)^2%
+            }%
+        }
+    }
+\makeatother
+% https://tex.stackexchange.com/a/59912
+% https://riptutorial.com/latex/example/28657/loops---repeating-things
+
+% Add quad
+\makeatletter
+    \newcommand{\addquad}[1]{% \gausserror{G}{faktoren}
+        \sqrt{%
+            \@tempswafalse
+            \@for\factor:=#1
+            \do{
+                \if@tempswa+%
+                \else%
+                    \@tempswatrue%
+                \fi%
+                \left(\Delta\factor\right)^2%
+            }%
+        }
+    }
+\makeatother
+
+% rej quad
+\makeatletter
+    \newcommand{\relquad}[1]{% \gausserror{G}{faktoren}
+        \sqrt{%
+            \@tempswafalse
+            \@for\factor:=#1
+            \do{
+                \if@tempswa+%
+                \else%
+                    \@tempswatrue%
+                \fi%
+                \left(\frac{\Delta\factor}{\factor}\right)^2%
+            }%
+        }
+    }
+\makeatother
+
+\newcommand*{\ub}[1]{\underbracket[0.1ex]{#1}}
+\newcommand*{\ob}[1]{\overbracket[0.1ex]{#1}}
+\newcommand*{\brc}[2]{\mathrlap{\ub{\phantom{#1}}_{#2}}#1}
+\newcommand*{\brd}[2]{\mathrlap{\ob{\phantom{#1}}^{#2}}#1}
+
+% for LaTeX https://tex.stackexchange.com/a/25251
+
+\makeatletter
+	\newcommand{\smaller}[2]{%
+		\begingroup
+			\fontsize{\dimexpr\f@size pt-#1pt}{\f@baselineskip}\selectfont
+			#2%
+		\endgroup
+	}
+	\newcommand{\bigger}[2]{%
+		\begingroup
+			\fontsize{\dimexpr\f@size pt+#1pt}{\f@baselineskip}\selectfont
+			#2%
+		\endgroup
+	}
+\makeatother
+
+% Title
+\title{[\versuch{}] \\ \versuchLang \\ Laborbericht}
+\author{Yudong Sun\\Gruppe I4\\%
+	{\smaller{2}{In Zusammenarbeit mit Schramm [Gruppe J4]}}}
+\date{17. März 2021}
+
+% / Custom Defs
+
+\begin{document}
+\includepdf[]{deckblatt.pdf}
+
+% Title
+	\maketitle
+	\thispagestyle{empty}
+
+	% Einstellungen
+	\nonum
+	\numberwithin{equation}{section}
+	% / Einstellungen
+
+	\begin{center}
+		\vfill
+		\begin{figure}[h]
+			\centering%
+			\includegraphics[width=\textwidth]{cover.jpg}
+			\captionsetup{labelformat=empty}
+			\caption{\textit{Individualisiertes Foldscope}}
+		\end{figure}
+		\vfill
+	\end{center}
+% / Title
+
+\newpage
+\input{0_introduction.tex}
+\tableofcontents
+%  Bibliography
+	\renewcommand*{\bibfont}{\raggedright}
+	\urlstyle{sf}
+	\hypersetup{urlcolor=gray}
+	\printbibliography
+% / Bibliography
+
+\newpage
+\input{1_tv.tex}
+\input{2_tv.tex}
+\input{3_tv.tex}
+\section{Videoaufzeichnung}
+     Zur Teilversuchen 1 und 2 haben wir eine Videoaufzeichnung vorbereitet. Sie ist unter \textcolor{gray}{\textit{redacted}} ansehbar. 
+
+\resnum
+\newpage
+\begin{appendices}
+	\input{0_appendices.tex}
+\end{appendices}
+
+\end{document}
