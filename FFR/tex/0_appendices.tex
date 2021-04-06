@@ -1,0 +1,226 @@
+\section{\gnuplot{} Quellcode zur Auswertung von Teilversuch 1}
+    \subsection{Senkrechter Fall}
+    \label{appdx:tv1-senk-gp}
+    {  
+        % % Surpress "errors" in minted
+        % https://tex.stackexchange.com/a/289068
+        \renewcommand{\fcolorbox}[4][]{#4}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{gnuplot}
+#!/usr/bin/env gnuplot
+
+set term epslatex color size 6in, 4in
+set output "tv1-senkrecht.tex"
+set decimalsign locale 'de_DE.UTF-8'
+
+set title "Reflektionskoeffizient gegen Einfallswinkel"
+set ylabel "Reflektionskoeffizient $\\zeta^\\bot$ (Einheitslos)"
+set xlabel "Einfallswinkel $\\alpha$ ($\\si{\\degree}$)"
+
+set mxtics
+set mytics
+set samples 10000
+
+f(x) = ((sqrt(n**2 - (sin(pi*x/180))**2) - cos(pi*x/180))**2)/(n**2 - 1)
+
+n = 1.55
+# (x, y, xdelta, ydelta)
+fit f(x) "senkrecht.dat" u 1:2:(2.5):3 xyerrors via n
+
+# Linien
+set key bottom right spacing 2
+
+titel = "$\\frac{\\left(\\sqrt{(".gprintf("%.5f", n).")^2 - \\sin^2\\alpha} - \\cos\\alpha\\right)^2}{(".gprintf("%.5f", n).")^2 - 1}$"
+plot f(x) title titel lc rgb 'dark-magenta', \
+    "senkrecht.dat" u 1:2:(2.5):3 with xyerrorbars title "Messpunkte" pointtype 0 lc rgb 'dark-goldenrod'
+        \end{minted}
+    }
+    mit \texttt{senkrecht.dat}:
+    \begin{multicols}{2}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+#alpha/deg  Zeta    deltaZeta
+5           0,191   0,004
+10          0,195   0,005
+15          0,200   0,005
+20          0,208   0,005
+25          0,222   0,005
+30          0,224   0,005
+35          0,243   0,006
+40          0,260   0,006
+45          0,279   0,006
+50          0,306   0,007
+55          0,347   0,008
+60          0,378   0,008
+65          0,421   0,009
+70          0,456   0,010
+75          0,554   0,012
+80          0,595   0,013
+        \end{minted}
+    \end{multicols}
+    \vspace{-\baselineskip}
+    Rohausgabe:
+    \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+After 3 iterations the fit converged.
+final sum of squares of residuals : 16.0509
+rel. change during last iteration : -1.47495e-06
+
+degrees of freedom    (FIT_NDF)                        : 15
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.03444
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.07006
+p-value of the Chisq distribution (FIT_P)              : 0.378676
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+n               = 1.46469          +/- 0.00659      (0.4499%)
+    \end{minted}
+
+    \subsection{Paralleler Fall}
+    \label{appdx:tv1-parl-gp}
+    {  
+        % % Surpress "errors" in minted
+        % https://tex.stackexchange.com/a/289068
+        \renewcommand{\fcolorbox}[4][]{#4}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{gnuplot}
+#!/usr/bin/env gnuplot
+
+set term epslatex color size 6in, 4in
+set output "tv1-parallel.tex"
+set decimalsign locale 'de_DE.UTF-8'
+
+set title "Reflektionskoeffizient$^2$ gegen Einfallswinkel"
+set ylabel "Reflektionskoeffizient$^2$ $\\left(\\zeta^\\parallel\\right)^2$ (Einheitslos)"
+set xlabel "Einfallswinkel $\\alpha$ ($\\si{\\degree}$)"
+
+set mxtics
+set mytics
+set samples 10000
+
+f(x) = ((n*n*cos(x*pi/180)-sqrt(n*n - sin(x*pi/180)*sin(x*pi/180))) / (n*n*cos(x*pi/180)+sqrt(n*n - sin(x*pi/180)*sin(x*pi/180))))**2
+
+n = 1.55
+# (x, y, xdelta, ydelta)
+fit f(x) "parallel.dat" u 1:2:(2.5):3 xyerrors via n
+
+# Linien
+set key top right spacing 2
+
+titel = "$\\left(\\frac{(".gprintf("%.5f", n).")^2\\cos(\\alpha) - \\sqrt{(".gprintf("%.5f", n).")^2-\\sin^2(\\alpha)}}{(".gprintf("%.5f", n).")^2\\cos(\\alpha) + \\sqrt{(".gprintf("%.5f", n).")^2-\\sin^2(\\alpha)}}\\right)^2$"
+plot f(x) title titel lc rgb 'dark-magenta', \
+    "parallel.dat" u 1:2:(2.5):3 with xyerrorbars title "Messpunkte" pointtype 0 lc rgb 'dark-goldenrod'
+        \end{minted}
+    }
+    mit \texttt{parallel.dat}:
+    \begin{multicols}{2}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+# alpha/deg tilde{I} delta tilde{I}
+5           0,0416   0,0017
+10          0,0409   0,0016
+15          0,0393   0,0016
+20          0,0361   0,0015
+25          0,0321   0,0013
+30          0,0295   0,0012
+35          0,0226   0,0009
+40          0,0188   0,0008
+45          0,0127   0,0005
+50          0,00739  0,00029
+52,5        0,00545  0,00022
+55          0,00289  0,00012
+57,5        0,00164  0,00007
+60          0,00187  0,00008
+62,5        0,00348  0,00014
+65          0,00746  0,00029
+67,5        0,0144   0,0006
+70          0,0311   0,0013
+75          0,076    0,003
+80          0,127    0,005
+        \end{minted}
+    \end{multicols}
+    \vspace{-\baselineskip}
+    Rohausgabe:
+    \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+After 3 iterations the fit converged.
+final sum of squares of residuals : 30.1409
+rel. change during last iteration : -8.25091e-16
+
+degrees of freedom    (FIT_NDF)                        : 19
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.25951
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.58636
+p-value of the Chisq distribution (FIT_P)              : 0.0500322
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+n               = 1.52605          +/- 0.008781     (0.5754%)
+    \end{minted}
+
+\section{\gnuplot{} Quellcode zur Auswertung von Teilversuch 2}
+    \label{appdx:tv2-gnuplot}
+    {  
+        % % Surpress "errors" in minted
+        % https://tex.stackexchange.com/a/289068
+        \renewcommand{\fcolorbox}[4][]{#4}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{gnuplot}
+#!/usr/bin/env gnuplot
+
+set term epslatex color size 6in, 4in
+set output "tv2-plot.tex"
+set decimalsign locale 'de_DE.UTF-8'
+
+set title "Drehwinkel der Polarisationsebene gegen Einfallswinkel"
+set ylabel "Drehwinkel $\\Psi$ ($\\si{\\degree}$)"
+set xlabel "Einfallswinkel $\\alpha$ ($\\si{\\degree}$)"
+
+set mxtics
+set mytics
+set samples 10000
+
+f(x) = (180/pi)*atan(-(cos(x*pi/180)*sqrt(n*n - sin(x*pi/180)*sin(x*pi/180)))/(sin(x*pi/180)*sin(x*pi/180)))
+
+n = 1.55
+# (x, y, xdelta, ydelta)
+fit f(x) "tv2.dat" u 1:2:(2.5):(0.8) xyerrors via n
+
+# Linien
+set key bottom right spacing 2
+
+titel = "$\\arctan \\left(- \\frac{\\cos\\alpha \\sqrt{(".gprintf("%.5f", n).")^2-\\sin^2\\alpha}}{\\sin^2\\alpha} \\right)$"
+plot f(x) title titel lc rgb 'dark-magenta', \
+    "tv2.dat" u 1:2:(2.5):(0.8) with xyerrorbars title "Messpunkte" pointtype 0 lc rgb 'dark-goldenrod'
+        \end{minted}
+    }
+    mit \texttt{tv2.dat}:
+    \begin{multicols}{2}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+# alpha/deg Psi/deg
+15,0        -89,0
+20,0        -87,0
+25,0        -84,5
+30,0        -81,0
+35,0        -76,5
+40,0        -73,0
+45,0        -67,0
+50,0        -60,0
+52,5        -56,5
+55,0        -52,0
+57,5        -48,0
+60,0        -43,0
+65,0        -35,0
+70,0        -25,0
+75,0        -14,5
+80,0        -11,0
+        \end{minted}
+    \end{multicols}
+    \vspace{-\baselineskip}
+    Rohausgabe:
+    \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+After 5 iterations the fit converged.
+final sum of squares of residuals : 9.14718
+rel. change during last iteration : -1.04167e-06
+
+degrees of freedom    (FIT_NDF)                        : 15
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.780905
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.609812
+p-value of the Chisq distribution (FIT_P)              : 0.869697
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+n               = 1.69105          +/- 0.04292      (2.538%)
+    \end{minted}

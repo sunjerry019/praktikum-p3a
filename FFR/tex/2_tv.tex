@@ -1,0 +1,93 @@
+\section{Teilversuch 2: Messung der Drehungswinkel der Polarisationsebene in Abhängigkeit vom Einfallswinkel}
+	Wir setzen zunächst eine Vorzeichenkonvention fest: eine Drehung im Gegenuhrzeigesinn ist positiv und eine Drehung im Uhrzeigesinn ist negativ. Somit ist der Polarisator $P_1$ um $\delta = \SI{-45.0(5)}{\degree}$ eingestellt. Aus der Anleitung haben wir $\Psi = \delta - \omega$ mit 
+	\begin{equation}
+		\label{eqn:psi}
+		\Psi = \arctan \left(- \frac{\cos\alpha \sqrt{n^2-\sin^2\alpha}}{\sin^2\alpha} \right)
+	\end{equation}
+	Wenn man die Gleichung \eqref{eqn:psi} für $n=\num{1.5}$ plottet, sieht man, dass bei $\alpha = \SI{0}{\degree}$, die Winkeländerung $\Psi \approx \SI{-90}{\degree}$ ist. Das ergibt auch Sinn, da die Händigkeit eines zirkular polarisierten Licht sich bei einer senkrechten Reflexion ändert. Wir wissen, dass diese Drehung im Gegenuhrzeigesinn sein soll, also stimmt dieses negatives Vorzeichen mit unserer Vorzeichenkonvention (da $\Psi = \delta - \omega \equiv \theta_\text{Initial} - \theta_\text{Final} = - (\theta_\text{Final} - \theta_\text{Initial})$). 
+
+	Es ist hier auch zu bemerken, dass hier nur die Differenz zwischen $P_1$ und $P_2$ wichtig ist. In diesem Fall stimmen die Winkel hier nicht mit der Winkel aus der Anleitung. In der Anleitung ist der Winkel $\delta$ und $\omega$ von der $E^\parallel$-Achse gemessen. Im Experiment sind sie aber von der $E^\bot$-Achse gemessen. Also gilt mit der Anleitungkonvention:
+	\begin{align}
+		\delta &=  \SI{90}{\degree} - \SI{45.0(5)}{\degree} = \SI{45.0(5)}{\degree} \\ 
+		\omega &=  (\SI{90}{\degree} - P_2)\,\brc{ + \SI{90}{\degree}~}{} = \SI{180}{\degree} - P_2 \\[-1em]
+		&\phantom{=  \SI{90}{\degree}}\text{\scriptsize Gemessene $P_2$ senkrecht zur Polarisationsebene} \notag
+	\end{align} 
+	Im unserer Konvention ist aber mit einer Drehung im Gegenuhrzeigesinn:
+	\begin{align}
+		\delta &=  \SI{-45.0(5)}{\degree}\\ 
+		\omega &=  -P_2 + \SI{90}{\degree}
+	\end{align}
+	In beiden Fälle ist die Vorzeichenkonvention gleich: Drehung im Gegenuhrzeigesinn $ = $ positiv.
+
+	Daraus folgt, dass unseres $\Psi$ (und dessen Fehler) gegeben durch ist:
+	\begin{align}
+		\Psi &= \delta - \omega = \SI{-45.0}{\degree} - \left(-P_2 + \SI{90}{\degree}\right) = P_2 - \SI{135.0}{\degree} \\
+		\Delta\Psi &= \addquad{\delta,\omega}
+	\end{align}
+	\begin{beispiel}
+		Für $\alpha = \SI{15.0(25)}{\degree}$ ist:
+		\begin{align}
+			\Psi = \SI{46.0}{\degree} - \SI{135.0}{\degree} = \SI{-89.0}{\degree}
+		\end{align}
+	\end{beispiel}
+	Die weitere Rechnungen erfolgen im LibreOffice Calc.
+	\newpage
+	Mit $\alpha = \frac{\varphi}{2}$:
+	\begin{center}
+		\begin{tabular}{l*{8}{r}}
+			\toprule
+			$\alpha / \si{\degree}$ & \num{15.0} & \num{20.0} & \num{25.0} & \num{30.0} & \num{35.0} & \num{40.0} & \num{45.0} & \num{50.0} \\
+			\midrule
+			$\Psi / \si{\degree}$   & \num{-89.0} & \num{-87.0} & \num{-84.5} & \num{-81.0} & \num{-76.5} & \num{-73.0} & \num{-67.0} & \num{-60.0} \\
+			\bottomrule
+			\\[-0.5em]
+			\toprule
+			$\alpha / \si{\degree}$ & \num{52.5} & \num{55.0} & \num{57.5} & \num{60.0} & \num{65.0} & \num{70.0} & \num{75.0} & \num{80.0} \\
+			\midrule
+			$\Psi / \si{\degree}$   & \num{-56.5} & \num{-52.0} & \num{-48.0} & \num{-43.0} & \num{-35.0} & \num{-25.0} & \num{-14.5} & \num{-11.0} \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	mit $\Delta\Psi = \addquad{\delta,\omega} = \sqrt{2(\num{0.5}^2)} = \SI{0.8}{\degree}$. Es ist ein Fehler von $\Delta \alpha = \SI{2.5}{\degree}$ auch zu berücksichtigen.
+
+	Nun plotten wir die Daten mit \gnuplot{} und führe eine Kurveanpassung mit Gleichung \eqref{eqn:psi} durch (siehe Appendix \ref{appdx:tv2-gnuplot}). Wie vorher ist $n = \num{1.55}$ als Anfangswert verwendet.
+	\begin{figure}[H]
+		\centering
+		\input{./plots/tv2-plot.tex}
+		\caption{\centering Drehwinkel der Polarisationsebene gegen Einfallswinkel $(\chi^2_{\text{red}} = 0.609812)$ }
+		\label{fig:tvtwo-plot}
+		\vspace{-1em}
+	\end{figure}
+	Als Endergebnis erhalten wir: $n = \num{1.69105(4292)} = \num{1.69(5)}$. Die Anpassung hat ein $\chi^2_{\text{red}} = 0.609812 < 1$, was eine mögliche Überanpassung bedeuetet. Von unserem Plot ist aber klar, dass das nicht der Fall ist. Die Anpassung ist also eine gute Anpassung. 
+	\newpage
+	\subsection{Diskussion}
+		Zusammengefasst haben wir:
+
+		\begin{center}
+			\vspace{0.5em}
+			\begin{tabular}{ll}
+				\toprule
+				Methode & $n$ \\
+				\midrule
+				$\zeta^\bot$      & \num{1.465(7)} \\
+				$\zeta^\parallel$ & \num{1.526(9)} \\
+				$\alpha_p$        & \num{1.57(16)} \\
+				\midrule
+				Drehwinkel der Polarisationsebene & \num{1.69(5)} \\
+				\midrule
+				Anleitung         & \num{1.63} \\
+				\bottomrule
+			\end{tabular}
+			\vspace{0.5em}
+		\end{center}
+
+		Der Brechungsindex, den wir im Teilversuch 2 berechnet haben, ist verträglich mit dem Literaturwert aus der Anleitung. Diese beide Werten unterscheiden sich nur knapp ($\num{0.01}$ außerhalb des Fehlerintervalls). Offentsichlich ist die Methode im Teilversuch 2 die genauere Methode, um die Brechungsindex zu berechnen. Da wir hier immer nur das Minimum gefunden haben, ohne es beachaten zu müssen, was die genaue Multimetermessung ist, ist dieser Methode von Raumbeleuchtung nur wenig betroffen. Es gab aber immer noch einen Unterscheid und die mögliche Fehlerquellen sind:
+		\begin{itemize}
+			\item Der Laserstrahl war nicht komplett horizontal (\textit{cf.} Teilversuch 1)
+			\item Der Prismatisch muss bei jeder Messung erst vom Pfostenhalter freigesetzt werden, bevor man ihn drehen kann, was zur Ungenauigkeiten führen könnte. Die Endposition des Primas könnte deswegen nicht senkrecht zur Laserstrahl sein.
+			\item Die Polarisationsfiltern standen eventuell nicht perfekt senkrecht zum Laserstrahl, was die Strahlrichtung und Polarisation eventuell ändern könnte.
+			\item Bei mancher Winkel war es den genaue Winkel $\alpha$ wegen Parallexfehler unter einer unter einer Schraube schwer zu treffen. 
+		\end{itemize}
+		Um die Genauigkeit zu verbessern könnte man beispielsweise eine Postklammer verwendet werden, sodass man die Tischebene erhalten bleibt während man den Prismatisch dreht. 
+
+
