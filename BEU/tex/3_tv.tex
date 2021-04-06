@@ -1,0 +1,8 @@
+\section{Teilversuch 3: Fraunhofer-Beugung am Einfachspalt}
+	Die mögliche Fehlerquellen sind:
+	\begin{itemize}
+		\item Die Messung der Abstand $R$ war ziemlich ungenau, da es schwer ist, das Mittel des Spaltes per Augenmaß zu bestimmen. Man kann auch schwer feststellen, ob das Maßband senkrecht zum Spalt und CCD-Kamera steht, oder sogar, ob der Spalt überhaupt parallel zur CCD Kamera ist. 
+		\item Der Laserstrahl war leicht nach unten gekippt. Deswegen trifft er nicht senkrecht auf der Spalte, was zur Änderung im Beugungsmuster führen kann. 
+		\item Die Variablen $b$, $\lambda$ und $R$ haben höhe Korrelationen, da viele Wertepaare das gleiche Verhältnis ergibt. Obwohl wir während des Fits im MATLAB die obere und untere Beschränkungen festgelegt haben, gibt es immer noch viel Spielraum. Beispielsweise ist die gefundene Wellenlänge des Lasers \SI{676.8}{\nano\meter}, was viel länger im Vergleich zu unserem Literaturwert ist. Die Unsicherheiten aus MATLAB sind deswegen ziemlich hoch, mit einer Unsicherheit bei der Fitparameter $b$ von $\approx \pm \SI{48e-4}{\meter}$.
+		\item Es könnte auch sein, dass die Umgebungsbeleuchtung nicht gleichmäßig auf der CCD-Kamera fällt, was das Fit-Paramter $c$ nicht berücksichtigen kann.
+	\end{itemize}
