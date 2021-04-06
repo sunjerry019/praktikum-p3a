@@ -1,0 +1,43 @@
+\newcommand*{\ncot}[0]{n_{\text{CO}_2}}
+
+\section{Teilversuch 3: Bestimmung des Brechungsindex von $\text{CO}_2$}
+	Aus der Anleitung ist der Brechungsindex von $\text{CO}_2$ gegeben durch:
+	\begin{equation}
+		\ncot = \nluft + \frac{N\lambda}{2l} \equiv \nluft + \varepsilon
+	\end{equation}
+	mit dem entsprechenden Fehler:
+	\begin{align}
+		\Delta \ncot &= \addquad{\nluft, \varepsilon} \notag \\
+		&=\sqrt{(\Delta\nluft)^2 + \varepsilon^2 \left[
+			\left(\frac{\Delta N}{N}\right)^2 + 
+			\left(\frac{\Delta \lambda}{\lambda}\right)^2 + 
+			\left(\frac{\Delta l}{l}\right)^2
+		\right]}
+	\end{align}
+	Aus dem Versuch haben wir einen Durchschnitt von $N = \num{12(1)}$, wobei $\Delta N = 1$ die Schwankung ist. Die Schwankung ist hier als Unsicherheit genommen, da $n=3$ zu klein einer Datensatz ist, um die statische Unsicherheit als Unsicherheit zu betrachten.
+
+	Mit der Werten:
+	\begin{center}
+		\begin{tabular}{lll}
+			\toprule
+			Variable & Wert & Bedeutung \\
+			\midrule
+			$\lambda$ & \SI{520(20)}{\nano\meter} & Wellenlänge des Lasers \\
+			$l$ & \SI{50(1)}{\milli\meter} & Optische Länge der Kapsel \\
+			$\nluft$ & \num{1.00(10)} & Brechungsindex von Luft \\
+			$N$ & \num{12(1)} & Durchschnittliche Anzahl von Durchgänge \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	erhalten wir:
+	\begin{align}
+		\ncot  &= \num{1.00} + \frac{12(\SI{520e-9}{\meter})}{2(\SI{50e-3}{\meter})} = \num{1.0000624} \\
+		\Delta\ncot
+			&= \sqrt{(\num{0.10})^2 + \left(\num{6.24e-5}\right)^2 \left[
+				\left(\frac{1}{12}\right)^2 + 
+				\left(\frac{20}{520}\right)^2 + 
+				\left(\frac{1}{50}\right)^2
+			\right]} \notag \\
+			&= \num{0.11} \sigfig{2}
+	\end{align}
+	Somit ist $\ncot = \num{1.00(11)}$, was mit dem Litaturwert von $n_{\text{CO}_2\text{, Lit}} = \num{1.000416}$ übereinstimmt. Unserer Mach-Zender-Interferometer ist aber einfach zu ungenau, um ein besseres Ergebnis zu erhalten. 

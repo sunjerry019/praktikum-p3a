@@ -1,0 +1,117 @@
+\section{\gnuplot{} Quellcode zur Auswertung von Teilversuch 2}
+    \label{appdx:gnuplottv2}
+    {  
+        % % Surpress "errors" in minted
+        % https://tex.stackexchange.com/a/289068
+        \renewcommand{\fcolorbox}[4][]{#4}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{gnuplot}
+#!/usr/bin/env gnuplot
+# Version >= 5.2
+
+set term epslatex color size 6in, 4in
+set output "tv2-plot.tex"
+set decimalsign locale 'de_DE.UTF-8'
+
+set title "Druck gegen die Anzahl der Durchgängen"
+set ylabel "Anzahl der Durchgängen $\\Delta m$ (Einheitslos)"
+set xlabel "Druck $P$ ($\\si{\\hecto\\pascal}$)"
+
+set mxtics
+set mytics
+set samples 10000
+
+f(x) = g*x + c
+
+array A_m[4]
+array A_m_err[4]
+array A_c[4]
+array A_c_err[4]
+array chisq[4]
+array titel[4]
+
+# https://stackoverflow.com/a/17884635
+do for [t=2:4] {
+    g = 0.130; c = 60; # Reset params
+    fit f(x) "tv2.dat" u t:1 via g,c
+    A_m[t] = g
+    A_m_err[t] = g_err
+    A_c[t] = c
+    A_c_err[t] = c_err
+    chisq[t] = FIT_STDFIT**2
+    titel[t] = "$".gprintf("%.5f", g)."P + (".gprintf("%.5f", c).")$"
+}
+# Linien
+set key bottom right vertical maxrows 10 width -8
+
+plot for [i=2:4] "tv2.dat" u i:1 title "Messung ".(i-1) pointtype 77 lc (i-1) ps 2, for [i=2:4] A_m[i]*x+A_c[i] title titel[i] lc (i-1) lw 2
+        \end{minted}
+    }
+    mit \texttt{tv4.dat}:
+    \begin{multicols}{2}
+        \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+# m P1/hPa  P2/hPa  P3/hPa
+0   494     509     482
+5   534     545     517
+10  571     586     549
+15  610     621     586
+20  649     661     622
+25  689     702     641
+        \end{minted}
+    \end{multicols}
+    \vspace{-\baselineskip}
+    Rohausgabe:
+    \begin{minted}[linenos,breaklines,autogobble,frame=leftline,framesep=10pt]{text}
+After 5 iterations the fit converged.
+final sum of squares of residuals : 0.0467405
+rel. change during last iteration : -2.826e-12
+
+degrees of freedom    (FIT_NDF)                        : 4
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.108098
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0116851
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+g               = 0.128757         +/- 0.0006655    (0.5168%)
+c               = -63.6171         +/- 0.3959       (0.6223%)
+
+correlation matrix of the fit parameters:
+                g      c      
+g               1.000 
+c              -0.994  1.000    
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 0.225243
+rel. change during last iteration : -9.26777e-13
+
+degrees of freedom    (FIT_NDF)                        : 4
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.237299
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.0563106
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+g               = 0.129755         +/- 0.001472     (1.135%)
+c               = -65.8721         +/- 0.8946       (1.358%)
+
+correlation matrix of the fit parameters:
+                g      c      
+g               1.000 
+c              -0.994  1.000 
+
+After 5 iterations the fit converged.
+final sum of squares of residuals : 2.60135
+rel. change during last iteration : -1.65252e-13
+
+degrees of freedom    (FIT_NDF)                        : 4
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.806435
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.650338
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+g               = 0.151665         +/- 0.005865     (3.867%)
+c               = -73.3675         +/- 3.337        (4.548%)
+
+correlation matrix of the fit parameters:
+                g      c      
+g               1.000 
+c              -0.995  1.000 
+    \end{minted}

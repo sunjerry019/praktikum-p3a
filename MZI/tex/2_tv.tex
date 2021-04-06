@@ -1,0 +1,84 @@
+\newcommand*{\nluft}[0]{n_{\text{Luft}}}
+
+\section{Teilversuch 2: Bestimmung des Brechungsindex von Luft}
+	Aus der Anleitung ist der Brechungsindex von Luft gegeben durch:
+	\begin{equation}
+		\nluft = \frac{\lambda P_0}{s}\cdot g + 1 
+	\end{equation}
+	mit dem entsprechen Fehler:
+	\begin{align}
+		\Delta \nluft = \nluft \relquad{\lambda,P_0,s,g}
+	\end{align}
+	wobei $g$ die Steigung des Graphs von $\Delta m$ (die Anzahl der Durchgänge) gegen $P$ (Druck) ist. 
+
+	Wir plotten zunächst die Messwerten und führe mittels \gnuplot{} eine Kurveanpassung der Form $\Delta m = gP + c$ durch (Siehe Appendix \ref{appdx:gnuplottv2}). Ein Messfehler von $\Delta P_i = \SI{1}{\hecto\pascal}$ wird bei der Kurvenanpassung wegen der höhe Anzahl von Messwerten nicht berücksichtigt. 
+	\begin{figure}[H]
+		\centering
+		\input{./plots/tv2-plot.tex}
+		\caption{\centering Druck gegen die Anzahl der Durchgängen}
+		\label{fig:tv2-plot}
+		\vspace{-1em}
+	\end{figure}
+	Als Ergebnis erhalten wir:
+	\begin{center}
+		\begin{tabular}{llll}
+			\toprule
+			Messung & $g/\si{\per\hecto\pascal}$ & $c$ & $\chi^2_\text{red}$ \\
+			\midrule
+				$1$ & \num{0,12876(67)} & \num{-63,61708(39587)} & \num{0,01169} \\
+				$2$ & \num{0,12976(147)} & \num{-65,87209(89462)} & \num{0,05631} \\
+				$3$ & \num{0,15166(586)} & \num{-73,36752(333679)} & \num{0,65034} \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	Gerundet:
+	\begin{center}
+		\begin{tabular}{lll}
+			\toprule
+			Messung & $g/\si{\per\hecto\pascal}$ & $c$ \\
+			\midrule
+				$1$ & \num{0,1288(7)}  & \num{-63,6(4)}\\
+				$2$ & \num{0,1298(15)} & \num{-65,9(9)}\\
+				$3$ & \num{0,152(6)}   & \num{-73(4)}\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	Nun berechnen wir den Mittelwert von $g$. Wir vernachlässigen jegliche Fehler bei der einzelnen $g$-Werten und nehmen die statische Schwankung $$\Delta g = \frac{g_{\text{max}} - g_\text{min}}{2}$$ als der Fehler, da diese Schwankung viel große ist. Es ist in diesem Fall wegen der niedrigen Anzahl von $g$-Werten nicht sinnvoll, die Standardabweichung zu nehmen. 
+
+	Wir erhalten somit $\overline{g} = \SI{0.137(12)}{\per\hecto\pascal}$. Im Folgenden ist $g = \overline{g}$.
+
+	Mit der Messwerten:
+	\begin{center}
+		\begin{tabular}{lll}
+			\toprule
+			Variable & Wert & Bedeutung \\
+			\midrule
+			$\lambda$ & \SI{520(20)}{\nano\meter} & Wellenlänge des Lasers \\
+			$P_0$ & \SI{9.51(1)e4}{\pascal} & Atmosphäredruck im Raum \\
+			$s$ & \SI{256.38(3)}{\milli\meter} & Optische Länge der Küvette \\
+			$g$ & \SI{1.37(12)e-3}{\per\pascal} & Durchschnittliche Steigung \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	erhalten wir:
+	\begin{align}
+		\nluft 
+		&= \frac{(\SI{520e-9}{\meter})(\SI{9.51e4}{\pascal})}{\SI{256.38e-3}{\meter}}\cdot (\SI{1.37e-3}{\per\pascal}) + 1 \notag \\
+		&= \num{1.000264253} \sigfig{10} \\
+		\Delta\nluft 
+		&= (\num{1.000264253}) \sqrt{
+			\left(\frac{20}{520}\right)^2 +
+			\left(\frac{0.01}{9.51}\right)^2 +
+			\left(\frac{0.03}{256.38}\right)^2 +
+			\left(\frac{0.12}{1.37}\right)^2
+		} \notag \\
+		&= \num{0.10} \sigfig{2}
+	\end{align}
+	Somit erhalten wir als Endergebnis: $\nluft = \num{1.00(10)}$.
+
+	Dieses Ergebnis stimmt mit der Literaturwert $n_\text{Luft, Lit} = 1.000269$ überein. Der Fehler ist aber sehr groß, was hauptsächlich zur
+	\begin{itemize}
+		\item Unsicherheit in der Wellenlänge des Lasers und
+		\item Unsicherheit bei dem selbstständigen Zählen der Durchgängen
+	\end{itemize}
+	zurückzuführen ist. 
